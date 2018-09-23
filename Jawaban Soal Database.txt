@@ -1,0 +1,30 @@
+Soal 1
+Buatlah query untuk mendapatkan rata-rata total pembelian tiap user?
+
+SELECT users.name, 
+SUM(purchases.total) AS total_belanja, 
+COUNT(purchases.user_id) AS beli_berapa_kali,
+(SUM(purchases.total)/COUNT(purchases.user_id)) AS rata_rata FROM purchases 
+JOIN users 
+ON purchases.user_id=users.id 
+GROUP BY users.id
+
+
+Soal 2
+Buatlah Query untuk menampilkan total pembelian per item pada Bulan September?
+
+Jawaban Query Soal 2
+SELECT purchase_items.item_id,items.item_name, 
+SUM(purchase_items.qty) AS total_qty_bulan_september_2018
+FROM items 
+
+JOIN purchase_items 
+
+ON items.id=purchase_items.item_id 
+
+JOIN purchases 
+
+ON purchases.id=purchase_items.purchase_id 
+
+WHERE MONTH(purchases.delivery_datetime) = 9 AND YEAR(purchases.delivery_datetime) = 2018 
+GROUP BY purchase_items.item_id
